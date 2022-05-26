@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Negotiations</title>
+    <link rel="stylesheet" href="css/bootstrap.css">
+</head>
+
+<body class="container">
+
+    <h1 class="text-center">Negotiations</h1>
+
+    <div id="mensagemView"></div>
+
+    <form class="form">
+
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date" class="form-control" required autofocus/>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount</label>
+            <input type="number" min="1" step="1" id="amount" class="form-control" value="1" required/>
+        </div>
+
+        <div class="form-group">
+            <label for="value">Value</label>
+            <input id="value" type="number" class="form-control"  min="0.01" step="0.01" value="0.0" required />
+        </div>
+
+        <button class="btn btn-primary" type="submit">Include</button>
+    </form>
+    <br>
+    <br>
+</body>
+</html>
