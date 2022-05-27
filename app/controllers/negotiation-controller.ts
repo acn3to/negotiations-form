@@ -14,6 +14,7 @@ export class NegotiationController {
   add(): void {
     const negotiation = this.createNegotiation();
     console.log(negotiation);
+    this.clearForm();
   }
 
   createNegotiation(): Negotiation {
@@ -22,5 +23,12 @@ export class NegotiationController {
     const amount = parseInt(this.inputAmount.value);
     const value = parseFloat(this.inputValue.value);
     return new Negotiation(date, amount, value);
+  }
+
+  clearForm(): void {
+    this.inputDate.value = '';
+    this.inputAmount.value = '1';
+    this.inputValue.value = '0.0';
+    this.inputDate.focus();
   }
 }
