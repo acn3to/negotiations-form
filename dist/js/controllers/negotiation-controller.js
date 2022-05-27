@@ -1,3 +1,4 @@
+import { Negotiation } from '../models/negotiation.js';
 export class NegotiationController {
     constructor() {
         this.inputDate = document.querySelector('#date');
@@ -5,8 +6,14 @@ export class NegotiationController {
         this.inputValue = document.querySelector('#value');
     }
     add() {
-        console.log(this.inputDate);
-        console.log(this.inputAmount);
-        console.log(this.inputValue);
+        const negotiation = this.createNegotiation();
+        console.log(negotiation);
+    }
+    createNegotiation() {
+        const re = /-/g;
+        const date = new Date(this.inputDate.value.replace(re, ','));
+        const amount = parseInt(this.inputAmount.value);
+        const value = parseFloat(this.inputValue.value);
+        return new Negotiation(date, amount, value);
     }
 }
