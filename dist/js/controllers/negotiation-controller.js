@@ -1,3 +1,4 @@
+import { DaysOfWeek } from './../enums/days-of-week';
 import { MessageView } from './../views/message-view.js';
 import { NegotiationsView } from './../views/negotiations-view.js';
 import { Negotiation } from '../models/negotiation.js';
@@ -14,10 +15,16 @@ export class NegotiationController {
     }
     add() {
         const negotiation = this.createNegotiation();
+        if (!this.isBusinessDay(negotiation.date)) {
+            this.messageView.update('Only business day trades are accepted');
+            return;
+        }
         this.negotiations.add(negotiation);
-        console.log(this.negotiations.list());
         this.clearForm();
         this.updateView();
+    }
+    isBusinessDay(date) {
+        return date.getDay() > DaysOfWeek.SUNDAY && date.getDay() < DaysOfWeek.SATURDAY;
     }
     createNegotiation() {
         const re = /-/g;
