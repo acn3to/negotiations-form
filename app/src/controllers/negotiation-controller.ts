@@ -3,6 +3,7 @@ import { MessageView } from '../views/message-view.js';
 import { NegotiationsView } from '../views/negotiations-view.js';
 import { Negotiation } from '../models/negotiation.js';
 import { Negotiations } from '../models/negotiations.js';
+import { logRuntime } from '../decorators/log-runtime.js';
 
 export class NegotiationController {
   private inputDate: HTMLInputElement;
@@ -19,6 +20,7 @@ export class NegotiationController {
     this.negotiationsView.update(this.negotiations);
   }
 
+  @logRuntime()
   public add(): void {
     const negotiation = Negotiation.createFrom(
       this.inputDate.value,

@@ -1,3 +1,5 @@
+import { logRuntime } from '../decorators/log-runtime.js';
+
 export abstract class View<T> {
   protected element: HTMLElement;
   private scape = false;
@@ -14,6 +16,7 @@ export abstract class View<T> {
     }
   }
 
+  @logRuntime()
   public update(model: T): void {
     let template = this.template(model);
     if (this.scape) {
