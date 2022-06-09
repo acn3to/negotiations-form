@@ -42,6 +42,10 @@ export class NegotiationController {
     this.updateView();
   }
 
+  importData(): void {
+    alert('Importing data...');
+  }
+
   private isBusinessDay(date: Date) {
     return date.getDay() > DaysOfWeek.SUNDAY && date.getDay() < DaysOfWeek.SATURDAY;
   }
