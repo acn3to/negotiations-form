@@ -10,6 +10,7 @@ import { NegotiationsView } from '../views/negotiations-view.js';
 import { Negotiation } from '../models/negotiation.js';
 import { Negotiations } from '../models/negotiations.js';
 import { logRuntime } from '../decorators/log-runtime.js';
+import { inspect } from '../decorators/inspect.js';
 export class NegotiationController {
     constructor() {
         this.negotiations = new Negotiations();
@@ -45,5 +46,6 @@ export class NegotiationController {
     }
 }
 __decorate([
-    logRuntime()
+    logRuntime(true),
+    inspect()
 ], NegotiationController.prototype, "add", null);

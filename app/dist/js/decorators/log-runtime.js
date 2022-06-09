@@ -9,10 +9,10 @@ export function logRuntime(inSeconds = false) {
                 unit = 'seconds';
             }
             const t1 = performance.now();
-            const ret = originalMethod.apply(this, args);
+            const result = originalMethod.apply(this, args);
             const t2 = performance.now();
             console.log(`${propertyKey}, runtime: ${(t2 - t1) / divider} ${unit}`);
-            ret;
+            result;
         };
         return descriptor;
     };
