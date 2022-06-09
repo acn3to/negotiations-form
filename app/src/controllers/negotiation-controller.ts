@@ -5,19 +5,21 @@ import { Negotiation } from '../models/negotiation.js';
 import { Negotiations } from '../models/negotiations.js';
 import { logRuntime } from '../decorators/log-runtime.js';
 import { inspect } from '../decorators/inspect.js';
+import { domInjector } from '../decorators/dom-injector.js';
 
 export class NegotiationController {
+  @domInjector('#date')
   private inputDate: HTMLInputElement;
+  @domInjector('#amount')
   private inputAmount: HTMLInputElement;
+  @domInjector('#value')
   private inputValue: HTMLInputElement;
+
   private negotiations = new Negotiations();
   private negotiationsView = new NegotiationsView('#negotiationsView');
   private messageView = new MessageView('#messageView');
 
   constructor() {
-    this.inputDate = document.querySelector('#date') as HTMLInputElement;
-    this.inputAmount = document.querySelector('#amount') as HTMLInputElement;
-    this.inputValue = document.querySelector('#value') as HTMLInputElement;
     this.negotiationsView.update(this.negotiations);
   }
 

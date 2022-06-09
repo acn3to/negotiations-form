@@ -11,14 +11,12 @@ import { Negotiation } from '../models/negotiation.js';
 import { Negotiations } from '../models/negotiations.js';
 import { logRuntime } from '../decorators/log-runtime.js';
 import { inspect } from '../decorators/inspect.js';
+import { domInjector } from '../decorators/dom-injector.js';
 export class NegotiationController {
     constructor() {
         this.negotiations = new Negotiations();
         this.negotiationsView = new NegotiationsView('#negotiationsView');
         this.messageView = new MessageView('#messageView');
-        this.inputDate = document.querySelector('#date');
-        this.inputAmount = document.querySelector('#amount');
-        this.inputValue = document.querySelector('#value');
         this.negotiationsView.update(this.negotiations);
     }
     add() {
@@ -45,6 +43,15 @@ export class NegotiationController {
         this.messageView.update('Negotiation added successfully!');
     }
 }
+__decorate([
+    domInjector('#date')
+], NegotiationController.prototype, "inputDate", void 0);
+__decorate([
+    domInjector('#amount')
+], NegotiationController.prototype, "inputAmount", void 0);
+__decorate([
+    domInjector('#value')
+], NegotiationController.prototype, "inputValue", void 0);
 __decorate([
     logRuntime(true),
     inspect()
