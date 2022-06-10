@@ -43,7 +43,19 @@ export class NegotiationController {
   }
 
   importData(): void {
-    alert('Importing data...');
+    fetch('http://localhost:8080/data')
+      .then((res) => res.json())
+      .then((data: any[]) => {
+        return data.map((todayData) => {
+          return new Negotiation(new Date(), todayData.times, todayData.amount);
+        });
+      })
+      .then((todayNegotiations) => {
+        for (let negotiation of todayNegotiations) {
+          this.negotiations.add(negotiation);
+        }
+        this.negotiationsView.update(this.negotiations);
+      });
   }
 
   private isBusinessDay(date: Date) {
