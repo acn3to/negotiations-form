@@ -34,7 +34,16 @@ export class NegotiationController {
         this.updateView();
     }
     importData() {
-        this.negotiationsService.getTodayNegotiations().then((todayNegotiations) => {
+        this.negotiationsService
+            .getTodayNegotiations()
+            .then((todayNegotiations) => {
+            return todayNegotiations.filter((todayNegotiations) => {
+                return !this.negotiations
+                    .list()
+                    .some((negotiation) => negotiation.isEqual(todayNegotiations));
+            });
+        })
+            .then((todayNegotiations) => {
             for (let negotiation of todayNegotiations) {
                 this.negotiations.add(negotiation);
             }

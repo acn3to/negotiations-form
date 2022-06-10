@@ -47,12 +47,21 @@ export class NegotiationController {
   }
 
   importData(): void {
-    this.negotiationsService.getTodayNegotiations().then((todayNegotiations) => {
-      for (let negotiation of todayNegotiations) {
-        this.negotiations.add(negotiation);
-      }
-      this.negotiationsView.update(this.negotiations);
-    });
+    this.negotiationsService
+      .getTodayNegotiations()
+      .then((todayNegotiations) => {
+        return todayNegotiations.filter((todayNegotiations) => {
+          return !this.negotiations
+            .list()
+            .some((negotiation) => negotiation.isEqual(todayNegotiations));
+        });
+      })
+      .then((todayNegotiations) => {
+        for (let negotiation of todayNegotiations) {
+          this.negotiations.add(negotiation);
+        }
+        this.negotiationsView.update(this.negotiations);
+      });
   }
 
   private isBusinessDay(date: Date) {
