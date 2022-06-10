@@ -1,12 +1,12 @@
-import { TodayNegotiations } from './../interfaces/today-negotiations.js';
+import { domInjector } from '../decorators/dom-injector.js';
+import { inspect } from '../decorators/inspect.js';
+import { logRuntime } from '../decorators/log-runtime.js';
 import { DaysOfWeek } from '../enums/days-of-week.js';
-import { MessageView } from '../views/message-view.js';
-import { NegotiationsView } from '../views/negotiations-view.js';
 import { Negotiation } from '../models/negotiation.js';
 import { Negotiations } from '../models/negotiations.js';
-import { logRuntime } from '../decorators/log-runtime.js';
-import { inspect } from '../decorators/inspect.js';
-import { domInjector } from '../decorators/dom-injector.js';
+import { NegotiationsService } from '../services/negotiations-service.js';
+import { MessageView } from '../views/message-view.js';
+import { NegotiationsView } from '../views/negotiations-view.js';
 
 export class NegotiationController {
   @domInjector('#date')
@@ -19,6 +19,7 @@ export class NegotiationController {
   private negotiations = new Negotiations();
   private negotiationsView = new NegotiationsView('#negotiationsView');
   private messageView = new MessageView('#messageView');
+  private negotiationsService = new NegotiationsService();
 
   constructor() {
     this.negotiationsView.update(this.negotiations);
@@ -44,19 +45,12 @@ export class NegotiationController {
   }
 
   importData(): void {
-    fetch('http://localhost:8080/data')
-      .then((res) => res.json())
-      .then((data: TodayNegotiations[]) => {
-        return data.map((todayData) => {
-          return new Negotiation(new Date(), todayData.times, todayData.amount);
-        });
-      })
-      .then((todayNegotiations) => {
-        for (let negotiation of todayNegotiations) {
-          this.negotiations.add(negotiation);
-        }
-        this.negotiationsView.update(this.negotiations);
-      });
+    this.negotiationsService.getTodayNegotiations().then((todayNegotiations) => {
+      for (let negotiation of todayNegotiations) {
+        this.negotiations.add(negotiation);
+      }
+      this.negotiationsView.update(this.negotiations);
+    });
   }
 
   private isBusinessDay(date: Date) {

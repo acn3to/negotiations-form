@@ -4,19 +4,21 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+import { domInjector } from '../decorators/dom-injector.js';
+import { inspect } from '../decorators/inspect.js';
+import { logRuntime } from '../decorators/log-runtime.js';
 import { DaysOfWeek } from '../enums/days-of-week.js';
-import { MessageView } from '../views/message-view.js';
-import { NegotiationsView } from '../views/negotiations-view.js';
 import { Negotiation } from '../models/negotiation.js';
 import { Negotiations } from '../models/negotiations.js';
-import { logRuntime } from '../decorators/log-runtime.js';
-import { inspect } from '../decorators/inspect.js';
-import { domInjector } from '../decorators/dom-injector.js';
+import { NegotiationsService } from '../services/negotiations-service.js';
+import { MessageView } from '../views/message-view.js';
+import { NegotiationsView } from '../views/negotiations-view.js';
 export class NegotiationController {
     constructor() {
         this.negotiations = new Negotiations();
         this.negotiationsView = new NegotiationsView('#negotiationsView');
         this.messageView = new MessageView('#messageView');
+        this.negotiationsService = new NegotiationsService();
         this.negotiationsView.update(this.negotiations);
     }
     add() {
@@ -30,14 +32,7 @@ export class NegotiationController {
         this.updateView();
     }
     importData() {
-        fetch('http://localhost:8080/data')
-            .then((res) => res.json())
-            .then((data) => {
-            return data.map((todayData) => {
-                return new Negotiation(new Date(), todayData.times, todayData.amount);
-            });
-        })
-            .then((todayNegotiations) => {
+        this.negotiationsService.getTodayNegotiations().then((todayNegotiations) => {
             for (let negotiation of todayNegotiations) {
                 this.negotiations.add(negotiation);
             }
