@@ -1,5 +1,9 @@
-export class Negotiation {
-  constructor(private _date: Date, public readonly amount: number, public readonly value: number) {}
+import { Printable } from '../utils/printable.js';
+
+export class Negotiation extends Printable {
+  constructor(private _date: Date, public readonly amount: number, public readonly value: number) {
+    super();
+  }
 
   public static createFrom(
     dateString: string,
