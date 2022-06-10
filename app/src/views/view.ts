@@ -1,6 +1,3 @@
-import { inspect } from '../decorators/inspect.js';
-import { logRuntime } from '../decorators/log-runtime.js';
-
 export abstract class View<T> {
   protected element: HTMLElement;
 

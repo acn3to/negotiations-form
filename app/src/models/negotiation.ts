@@ -1,9 +1,7 @@
 import { Printable } from '../utils/printable.js';
 
-export class Negotiation extends Printable {
-  constructor(private _date: Date, public readonly amount: number, public readonly value: number) {
-    super();
-  }
+export class Negotiation implements Printable {
+  constructor(private _date: Date, public readonly amount: number, public readonly value: number) {}
 
   public static createFrom(
     dateString: string,
