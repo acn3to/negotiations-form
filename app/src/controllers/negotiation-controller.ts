@@ -1,3 +1,4 @@
+import { TodayNegotiations } from './../interfaces/today-negotiations.js';
 import { DaysOfWeek } from '../enums/days-of-week.js';
 import { MessageView } from '../views/message-view.js';
 import { NegotiationsView } from '../views/negotiations-view.js';
@@ -45,7 +46,7 @@ export class NegotiationController {
   importData(): void {
     fetch('http://localhost:8080/data')
       .then((res) => res.json())
-      .then((data: any[]) => {
+      .then((data: TodayNegotiations[]) => {
         return data.map((todayData) => {
           return new Negotiation(new Date(), todayData.times, todayData.amount);
         });
