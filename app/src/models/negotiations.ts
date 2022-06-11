@@ -1,8 +1,7 @@
-import { Comparable } from '../interfaces/comparable.js';
-import { Printable } from '../utils/printable.js';
+import { Model } from '../interfaces/model.js';
 import { Negotiation } from './negotiation.js';
 
-export class Negotiations implements Printable, Comparable<Negotiations> {
+export class Negotiations implements Model<Negotiations> {
   private negotiations: Negotiation[] = [];
 
   public add(negotiation: Negotiation) {
