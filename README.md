@@ -1,4 +1,4 @@
-<h1 align="center">Welcome to bank 👋</h1>
+<h1 align="center">Welcome to negotiations-form 👋</h1>
 <p>
   <a href="https://www.npmjs.com/package/bank" target="_blank">
     <img alt="Version" src="https://img.shields.io/npm/v/bank.svg">
@@ -7,6 +7,19 @@
     <img alt="License: ISC" src="https://img.shields.io/badge/License-ISC-yellow.svg" />
   </a>
 </p>
+
+> A negotiations form that simulates bank transactions and import data from an external API, built with TypeScript.
+
+
+## Demo 
+
+<div align="center">
+<img width="55%" src="https://media.giphy.com/media/vr4KJYq5Es6eLkNeaf/giphy.gif" alt="Demo Gif">
+</div>
+
+## Built with
+
+* [TypeScript](https://www.typescriptlang.org/)
 
 ## Install
 
@@ -18,6 +31,24 @@ npm install
 
 ```sh
 npm run start
+```
+
+## Server-api install
+
+```sh
+cd server-api/
+```
+
+And then...
+
+```sh
+npm install
+```
+
+## Server-api usage
+
+```sh
+npm start
 ```
 
 ## Author

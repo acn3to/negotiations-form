@@ -1,7 +1,7 @@
 {
-  "name": "bank",
+  "name": "negotiations-form",
   "version": "1.0.0",
-  "description": "",
+  "description": "A negotiations form that simulates bank transactions and import data from an external API, built with TypeScript.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
